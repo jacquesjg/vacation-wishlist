@@ -7,24 +7,24 @@ const weatherConditions = document.querySelector("#weather-conditions");
 const weatherTemp = document.querySelector("#weather-temp");
 
 localStorage.clear();
+const fetchMessage = document.createElement("div");
 
 const locationSuccess = async (position) => {
-  const fetchMessage = document.createElement("div");
   fetchMessage.innerText = "Fetching Weather";
   weather.append(fetchMessage);
   const lat = position.coords.latitude;
   const lon = position.coords.longitude;
-  const res = await fetch(`http://api.weatherstack.com/current?access_key=${WEATHER_API_KEY}&query=${lat},${lon}`);
+  const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}`);
   const data = await res.json();
   fetchMessage.removeChild(fetchMessage.lastChild);
-  weatherLocation.innerText = data.location.name + ", " + data.location.region;
-  weatherConditions.innerText = data.current.weather_descriptions[0];
-  weatherTemp.innerText = (data.current.temperature * (9 / 5)) + 32 + " °F";
+  weatherLocation.innerText = data.name + ", " + data.sys.country;
+  weatherConditions.innerText = data.weather[0].main;
+  weatherTemp.innerText = ((data.main.temp - 273.15) * 9 / 5 + 32).toFixed(1) + " °F";
 }
 
 const locationFail = (e) => {
-  console.log(e.message);
-  // TODO: display sth
+  fetchMessage.innerText = e.message;
+  weather.append(fetchMessage);
 }
 
 navigator.geolocation.getCurrentPosition(locationSuccess, locationFail);
