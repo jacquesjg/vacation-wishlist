@@ -1,5 +1,6 @@
-import handleSubmit from './modules/handleSubmit.mjs';
-import WEATHER_API_KEY from './weatherApiKey.js';
+import handleSubmit from '../js/modules/handleSubmit.mjs';
+import createCard from "../js/modules/createCard.mjs";
+import WEATHER_API_KEY from '../resources/keys/weatherApiKey.js';
 
 const weather = document.querySelector("#weather");
 const weatherLocation = document.querySelector("#weather-location");
@@ -7,6 +8,15 @@ const weatherConditions = document.querySelector("#weather-conditions");
 const weatherTemp = document.querySelector("#weather-temp");
 
 localStorage.clear();
+
+window.onload = async () => {
+  const res = await fetch(`http://localhost:3000/api/cards/`);
+  const data = await res.json();
+  data.destinations.forEach(card => {
+    createCard(card.destination, card.location, card.photo, card.description, card._id)
+  });;
+};
+
 const fetchMessage = document.createElement("div");
 
 const locationSuccess = async (position) => {

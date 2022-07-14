@@ -2,7 +2,8 @@ import editCard from "./editCard.mjs";
 import removeCard from "./removeCard.mjs";
 import cardDetail from './cardDetail.mjs';
 
-export default function createCard(destination, location, photo, description) {
+export default function createCard(destination, location, photo, description, id) {
+
   const picContainer = document.querySelector(".pic-container");
   const card = document.createElement("div");
   const cardPic = document.createElement("img");
@@ -15,6 +16,7 @@ export default function createCard(destination, location, photo, description) {
   const deleteButton = document.createElement("button");
 
   card.setAttribute("class", "card");
+  card.setAttribute("id", `${id}`);
   cardPic.setAttribute("id", "card-pic");
   cardDestination.setAttribute("id", "card-destination");
   cardLocation.setAttribute("id", "card-location");
