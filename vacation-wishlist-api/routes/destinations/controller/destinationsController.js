@@ -38,12 +38,10 @@ const addDestination = async (req, res) => {
 
 
 const updateDestination = async (req, res) => {
-  const { body: payload } = req;
-  const { id } = payload;
+  const { body: payload, body: { id: id } } = req;
 
   try {
     const updatedDestination = await Destination.findByIdAndUpdate(id, payload);
-
     if (!updatedDestination) {
 
       return res
