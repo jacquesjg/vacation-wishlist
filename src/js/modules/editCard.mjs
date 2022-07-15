@@ -19,7 +19,7 @@ export default async function editCard(e) {
     pic = data.results[0].urls.small;
   }
 
-  await fetch("http://localhost:3000/api/cards/update-destination", {
+  await fetch("http://localhost:3000/api/destinations/update-destination", {
     method: 'PUT',
     mode: 'cors',
     headers: {

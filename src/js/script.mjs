@@ -10,9 +10,9 @@ const weatherTemp = document.querySelector("#weather-temp");
 localStorage.clear();
 
 window.onload = async () => {
-  const res = await fetch(`http://localhost:3000/api/cards/`);
+  const res = await fetch(`http://localhost:3000/api/destinations`);
   const data = await res.json();
-  data.destinations.forEach(card => {
+  data.payload.forEach(card => {
     createCard(card.destination, card.location, card.photo, card.description, card._id)
   });;
 };

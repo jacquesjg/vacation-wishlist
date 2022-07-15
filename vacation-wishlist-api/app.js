@@ -1,28 +1,29 @@
 require("dotenv").config();
 const express = require("express");
-const MongoClient = require('mongodb').MongoClient;
+const mongoose = require('mongoose');
 const cors = require("cors");
 const app = express();
 
-MongoClient.connect(process.env.MONGO_DB, { useNewUrlParser: true }, function (err, client) {
-  const db = client.db('vacation-wishlist');
-  const collection = db.collection('destinations');
-  app.locals.collection = collection;
-  if (err) {
-    console.log(err.message);
-  }
-})
+mongoose
+  .connect(process.env.MONGO_DB, { useNewUrlParser: true })
+  .then(() => {
+    console.log('MONGODB CONNECTED');
+  })
+  .catch((e) => {
+    console.log(e);
+  });
 
-const cardsRouter = require('./routes/cards/cardsRouter');
+
+const destinationsRouter = require('./routes/destinations/destinationsRouter');
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/api/cards', cardsRouter);
+app.use('/api/destinations', destinationsRouter);
 
 app.get("/", (req, res) => {
-  res.send("Request");
+  res.send("Vacation Wishlist API");
 })
 
 app.listen(3000, () => {

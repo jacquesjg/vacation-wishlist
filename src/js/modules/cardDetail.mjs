@@ -4,5 +4,5 @@ export default function cardDetail(e) {
   localStorage.setItem("destination", data.children[1].innerText);
   localStorage.setItem("location", data.children[2].innerText);
   localStorage.setItem("description", data.children[3].innerText);
-  window.open("/detailsPage.html", "_blank");
-};
+  window.open("src/pages/detailsPage.html", "_blank");
+}

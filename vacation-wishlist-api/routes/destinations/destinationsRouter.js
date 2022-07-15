@@ -5,7 +5,7 @@ const {
   addDestination,
   updateDestination,
   deleteDestination
-} = require('./cardsController');
+} = require('./controller/destinationsController');
 
 router.get('/', getAllDestinations);
 router.post('/add-destination', addDestination);

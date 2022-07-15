@@ -1,10 +1,11 @@
 const destination = localStorage.getItem("destination");
+console.log(destination);
 const pic = localStorage.getItem("pic")
 const locationDest = localStorage.getItem("location")
 const description = localStorage.getItem("description")
 
 if (destination && pic && locationDest && description != null) {
-  const picContainer = document.querySelector(".pic-container");
+  const picContainer = document.querySelector(".pic-container-details");
   const card = document.createElement("div");
   const cardPic = document.createElement("img");
   const cardDestination = document.createElement("div");

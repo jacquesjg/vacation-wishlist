@@ -12,7 +12,7 @@ export default async function handleSubmit(e) {
   const photo = data.results[0].urls.small;
   document.querySelector("form").reset();
 
-  fetch("http://localhost:3000/api/cards/add-destination", {
+  fetch("http://localhost:3000/api/destinations/add-destination", {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -27,6 +27,6 @@ export default async function handleSubmit(e) {
     })
   }).then(response => response.json())
     .then(data => {
-      createCard(destination, location, photo, description, data.result.insertedId);
+      createCard(destination, location, photo, description, data.payload._id);
     });
 }
